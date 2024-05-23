@@ -177,7 +177,11 @@ class Profesor {
     }
 
     calcularSalario() {
-        return this.horasTrabajadas * this.tarifaHora;
+        let tarifaFinal = this.#tarifaHora
+        if (this.tipo.toLowerCase() === 'catedratico asociado') {
+            tarifaFinal *= 1.07;
+        }
+        return this.#horasTrabajadas * tarifaFinal;
     }
 }
 
@@ -249,7 +253,6 @@ function ingresarDatosProfesor(asignaturas) {
     return new Profesor(nombreProfesor, tipoProfesor, tarifaHora, horasTrabajadas, titulacion);
 }
 
-// Crear instancias de programas y asignaturas
 const programaIngenieria = new Programa('Ingenieria de Sistemas', 'diurno');
 const programaPsicologia = new Programa('Psicologia', 'nocturno');
 
@@ -335,7 +338,7 @@ function calcularSalarioProfesoresCatedraticos() {
     console.log(`El costo total de los salarios de los profesores catedráticos es: $${costoTotalProfesoresCatedraticos}`);
 }
 
-function calcularSalarioProfesoresPlanta(){
+function calcularSalarioProfesoresPlanta() {
     const profesoresPlanta = profesores.filter(profesor => profesor.tipo.toLowerCase() === 'planta');
     let costoTotalProfesoresPlanta = 0;
 
