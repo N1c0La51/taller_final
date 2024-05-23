@@ -177,11 +177,20 @@ class Profesor {
     }
 
     calcularSalario() {
-        let tarifaFinal = this.#tarifaHora
+        let tarifaFinal = this.tarifaHora;
         if (this.tipo.toLowerCase() === 'catedratico asociado') {
             tarifaFinal *= 1.07;
         }
-        return this.#horasTrabajadas * tarifaFinal;
+
+        this.programas.obtenerProgramas().forEach(programa => {
+            if (programa.tipo.toLowerCase() === 'diurno') {
+                tarifaFinal *= 1 + RECARGO_DIURNO; 
+            } else if (programa.tipo.toLowerCase() === 'nocturno') {
+                tarifaFinal *= 1 + RECARGO_NOCTURNO;
+            }
+        });
+
+        return this.horasTrabajadas * tarifaFinal;
     }
 }
 
