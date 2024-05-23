@@ -184,9 +184,9 @@ class Profesor {
 
         this.programas.obtenerProgramas().forEach(programa => {
             if (programa.tipo.toLowerCase() === 'diurno') {
-                tarifaFinal *= 1 + RECARGO_DIURNO; 
+                tarifaFinal *= 1 + 0.07; 
             } else if (programa.tipo.toLowerCase() === 'nocturno') {
-                tarifaFinal *= 1 + RECARGO_NOCTURNO;
+                tarifaFinal *= 1 + 0.12;
             }
         });
 
